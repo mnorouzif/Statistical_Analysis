@@ -1,0 +1,26 @@
+from sklearn.metrics import cohen_kappa_score
+import numpy as np
+
+# Define confusion matrix values for both models
+baseline_conf_matrix = np.array([[147, 7], [49, 271]])  # TN, FP, FN, TP
+okn_c_conf_matrix = np.array([[148, 6], [36, 284]])  # TN, FP, FN, TP
+
+# Convert confusion matrices to classification labels for Cohen's Kappa calculation
+# Simulating labels based on counts in confusion matrix
+def expand_conf_matrix(conf_matrix):
+    tn, fp, fn, tp = conf_matrix.ravel()
+    y_true = np.array([0] * (tn + fp) + [1] * (fn + tp))  # Ground truth
+    y_pred = np.array([0] * tn + [1] * fp + [0] * fn + [1] * tp)  # Predictions
+    return y_true, y_pred
+
+# Get labels for both models
+y_true_baseline, y_pred_baseline = expand_conf_matrix(baseline_conf_matrix)
+y_true_okn_c, y_pred_okn_c = expand_conf_matrix(okn_c_conf_matrix)
+
+# Compute Cohen's Kappa Score
+kappa_baseline = cohen_kappa_score(y_true_baseline, y_pred_baseline)
+kappa_okn_c = cohen_kappa_score(y_true_okn_c, y_pred_okn_c)
+
+# Display results
+print(kappa_baseline, kappa_okn_c)
+
