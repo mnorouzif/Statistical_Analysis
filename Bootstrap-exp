@@ -47,8 +47,8 @@ print(mean_score, (lower_bound, upper_bound))
 # Display results
 bootstrap_results = pd.DataFrame({'Bootstrap Score': bootstrap_scores})
 
-
-#  ====== ace_tools is not a reliable package =========
+# ================= Help DO not use ===================
+#  ====== ace_tools is NOT a reliable package =========
 # =====================================================
 
 # import ace_tools as tools
